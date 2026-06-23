@@ -1,90 +1,122 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'module.freezed.dart';
-part 'module.g.dart';
+// Plain Dart models — no code generation needed.
+// Same API as the Freezed version so no other files need changing.
 
-// ─────────────────────────────────────────────
-// Run after any model change:
-// dart run build_runner build --delete-conflicting-outputs
-// ─────────────────────────────────────────────
+class LearningModule {
+  const LearningModule({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.iconName,
+    required this.colorHex,
+    required this.lessons,
+    required this.quiz,
+  });
 
-@freezed
-class LearningModule with _$LearningModule {
-  // Private constructor enables custom getters below.
-  const LearningModule._();
+  final String id;
+  final String title;
+  final String subtitle;
+  final String iconName;
+  final String colorHex; // e.g. "534AB7" — no leading #
+  final List<Lesson> lessons;
+  final ModuleQuiz quiz;
 
-  const factory LearningModule({
-    required String id,
-    required String title,
-    required String subtitle,
-    required String iconName,
-    required String colorHex, // e.g. "534AB7" — no leading #
-    required List<Lesson> lessons,
-    required ModuleQuiz quiz,
-  }) = _LearningModule;
+  // ── Computed UI helpers ───────────────────────
 
-  factory LearningModule.fromJson(Map<String, dynamic> json) =>
-      _$LearningModuleFromJson(json);
-
-  /// Primary color parsed from the hex string in JSON.
   Color get color => Color(int.parse('FF$colorHex', radix: 16));
-
-  /// A soft 12% opacity version for backgrounds and badges.
   Color get lightColor => color.withOpacity(0.12);
 
-  /// Maps the iconName string from JSON to a Flutter IconData.
   IconData get icon {
     switch (iconName) {
-      case 'savings':
-        return Icons.savings_rounded;
-      case 'trending_up':
-        return Icons.trending_up_rounded;
-      case 'show_chart':
-        return Icons.show_chart_rounded;
-      case 'pie_chart':
-        return Icons.pie_chart_rounded;
-      case 'school':
-        return Icons.school_rounded;
-      default:
-        return Icons.book_rounded;
+      case 'savings':       return Icons.savings_rounded;
+      case 'trending_up':   return Icons.trending_up_rounded;
+      case 'show_chart':    return Icons.show_chart_rounded;
+      case 'pie_chart':     return Icons.pie_chart_rounded;
+      case 'school':        return Icons.school_rounded;
+      default:              return Icons.book_rounded;
     }
+  }
+
+  // ── JSON ─────────────────────────────────────
+
+  factory LearningModule.fromJson(Map<String, dynamic> json) {
+    return LearningModule(
+      id:        json['id'] as String,
+      title:     json['title'] as String,
+      subtitle:  json['subtitle'] as String,
+      iconName:  json['iconName'] as String,
+      colorHex:  json['colorHex'] as String,
+      lessons:   (json['lessons'] as List<dynamic>)
+                     .map((l) => Lesson.fromJson(l as Map<String, dynamic>))
+                     .toList(),
+      quiz:      ModuleQuiz.fromJson(json['quiz'] as Map<String, dynamic>),
+    );
   }
 }
 
-@freezed
-class Lesson with _$Lesson {
-  const factory Lesson({
-    required String id,
-    required String title,
-    required String duration,
-    required String content,
-    required List<String> keyPoints,
-  }) = _Lesson;
+class Lesson {
+  const Lesson({
+    required this.id,
+    required this.title,
+    required this.duration,
+    required this.content,
+    required this.keyPoints,
+  });
 
-  factory Lesson.fromJson(Map<String, dynamic> json) => _$LessonFromJson(json);
+  final String id;
+  final String title;
+  final String duration;
+  final String content;
+  final List<String> keyPoints;
+
+  factory Lesson.fromJson(Map<String, dynamic> json) {
+    return Lesson(
+      id:        json['id'] as String,
+      title:     json['title'] as String,
+      duration:  json['duration'] as String,
+      content:   json['content'] as String,
+      keyPoints: List<String>.from(json['keyPoints'] as List),
+    );
+  }
 }
 
-@freezed
-class ModuleQuiz with _$ModuleQuiz {
-  const factory ModuleQuiz({
-    required List<Question> questions,
-  }) = _ModuleQuiz;
+class ModuleQuiz {
+  const ModuleQuiz({required this.questions});
 
-  factory ModuleQuiz.fromJson(Map<String, dynamic> json) =>
-      _$ModuleQuizFromJson(json);
+  final List<Question> questions;
+
+  factory ModuleQuiz.fromJson(Map<String, dynamic> json) {
+    return ModuleQuiz(
+      questions: (json['questions'] as List<dynamic>)
+          .map((q) => Question.fromJson(q as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }
 
-@freezed
-class Question with _$Question {
-  const factory Question({
-    required String id,
-    required String question,
-    required List<String> options,
-    required int correctIndex,
-    required String explanation,
-  }) = _Question;
+class Question {
+  const Question({
+    required this.id,
+    required this.question,
+    required this.options,
+    required this.correctIndex,
+    required this.explanation,
+  });
 
-  factory Question.fromJson(Map<String, dynamic> json) =>
-      _$QuestionFromJson(json);
+  final String id;
+  final String question;
+  final List<String> options;
+  final int correctIndex;
+  final String explanation;
+
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      id:           json['id'] as String,
+      question:     json['question'] as String,
+      options:      List<String>.from(json['options'] as List),
+      correctIndex: json['correctIndex'] as int,
+      explanation:  json['explanation'] as String,
+    );
+  }
 }

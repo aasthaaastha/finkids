@@ -1,0 +1,266 @@
+{
+  "modules": [
+    {
+      "id": "savings",
+      "title": "What is saving?",
+      "subtitle": "Why keeping money matters",
+      "iconName": "savings",
+      "colorHex": "534AB7",
+      "lessons": [
+        {
+          "id": "savings_l1",
+          "title": "Why save money?",
+          "duration": "3 min read",
+          "content": "Saving money means keeping some of your money instead of spending it all. When you save, you can buy bigger things later, or have money ready if something unexpected happens.\n\nImagine you get ₹100 pocket money every week. If you spend all of it on snacks and games, you will have nothing left. But if you save even ₹30 each week, after 10 weeks you will have ₹300 — enough for something really special!",
+          "keyPoints": [
+            "Saving means setting aside money for later",
+            "Even saving a small amount adds up over time",
+            "Savings give you a safety net for surprises"
+          ]
+        },
+        {
+          "id": "savings_l2",
+          "title": "The piggy bank rule",
+          "duration": "4 min read",
+          "content": "A great rule for saving is called Save First, Spend Later. Every time you get money, put some aside before you spend anything. This is called paying yourself first.\n\nA popular way to split your money is the 50/30/20 rule — spend 50% on things you need (food, school), 30% on things you want (games, treats), and save 20%. If you get ₹100, that means saving ₹20 every time!",
+          "keyPoints": [
+            "Save before you spend — not after",
+            "The 50/30/20 rule helps split your money wisely",
+            "Even ₹5 saved today becomes more tomorrow"
+          ]
+        },
+        {
+          "id": "savings_l3",
+          "title": "Setting a savings goal",
+          "duration": "3 min read",
+          "content": "Goals make saving fun! Instead of saving with no plan, pick something you really want — maybe a new game, a book, or a gift for someone you love.\n\nWrite down your goal, how much it costs, and how long it will take to save. When you can see a clear plan, saving feels exciting instead of boring. Checking off each week you save feels great!",
+          "keyPoints": [
+            "Pick a specific thing you are saving for",
+            "Know exactly how much it costs",
+            "Track your progress every week to stay motivated"
+          ]
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "id": "savings_q1",
+            "question": "What does saving money mean?",
+            "options": [
+              "Spending all your money quickly",
+              "Keeping some money aside for later",
+              "Giving all your money to friends",
+              "Borrowing money from the bank"
+            ],
+            "correctIndex": 1,
+            "explanation": "Saving means setting aside money now instead of spending it all, so you have it available for something important later."
+          },
+          {
+            "id": "savings_q2",
+            "question": "In the 50/30/20 rule, what percentage goes to savings?",
+            "options": ["50%", "30%", "20%", "10%"],
+            "correctIndex": 2,
+            "explanation": "20% goes to savings. The 50% covers needs like food and school, and 30% covers things you want like games and treats."
+          },
+          {
+            "id": "savings_q3",
+            "question": "What does 'paying yourself first' mean?",
+            "options": [
+              "Buying yourself a gift before buying for others",
+              "Saving money before spending on anything else",
+              "Earning money by doing your own business",
+              "Getting paid extra for doing chores"
+            ],
+            "correctIndex": 1,
+            "explanation": "Paying yourself first means putting money into savings before you spend on anything else — savings come first, spending comes after."
+          },
+          {
+            "id": "savings_q4",
+            "question": "You get ₹100 pocket money each week and save ₹25. How much will you save in 4 weeks?",
+            "options": ["₹25", "₹75", "₹100", "₹125"],
+            "correctIndex": 2,
+            "explanation": "₹25 × 4 weeks = ₹100 saved! Small, consistent savings really add up over time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "compound",
+      "title": "Compound interest",
+      "subtitle": "Making your money grow on its own",
+      "iconName": "trending_up",
+      "colorHex": "854F0B",
+      "lessons": [
+        {
+          "id": "compound_l1",
+          "title": "What is interest?",
+          "duration": "3 min read",
+          "content": "When you put money in a bank, the bank pays you extra money just for keeping it there. This extra money is called interest.\n\nFor example, if you put ₹1,000 in a bank that pays 10% interest per year, after one year you will have ₹1,100. The bank gave you ₹100 just for saving with them — without you doing any extra work!",
+          "keyPoints": [
+            "Interest is money the bank pays you for saving with them",
+            "It is shown as a percentage per year (e.g. 10%)",
+            "Higher interest rate means you earn more money"
+          ]
+        },
+        {
+          "id": "compound_l2",
+          "title": "The magic of compounding",
+          "duration": "5 min read",
+          "content": "Compound interest is when you earn interest on your interest. It sounds simple, but the effect is powerful!\n\nYear 1: ₹1,000 + 10% = ₹1,100\nYear 2: ₹1,100 + 10% = ₹1,210\nYear 3: ₹1,210 + 10% = ₹1,331\n\nNotice how the amount you earn each year keeps getting bigger? That is compounding. You are earning money on money you already earned. Albert Einstein reportedly called compound interest the eighth wonder of the world.",
+          "keyPoints": [
+            "You earn interest on your previous interest too",
+            "The longer you save, the faster your money grows",
+            "Starting early gives compounding more time to work"
+          ]
+        },
+        {
+          "id": "compound_l3",
+          "title": "Start early, grow big",
+          "duration": "4 min read",
+          "content": "Time is the most important ingredient in compound interest. The earlier you start saving, the more your money grows — even if you save small amounts.\n\nIf you save ₹500 every month starting at age 15 at 12% interest, by age 60 you could have over ₹1.5 crore! If you wait until age 30 to start saving the same amount, you would have much less — even though you saved for many years.\n\nThe secret? Start today, even if it is a very small amount.",
+          "keyPoints": [
+            "Starting early beats starting with big amounts",
+            "Small amounts saved young can grow enormously",
+            "Every year you wait costs you more than you think"
+          ]
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "id": "compound_q1",
+            "question": "What is interest?",
+            "options": [
+              "A fee you pay to the bank every month",
+              "Extra money the bank pays you for saving",
+              "The total amount of money in your account",
+              "A type of bank account for adults"
+            ],
+            "correctIndex": 1,
+            "explanation": "Interest is extra money the bank pays you as a reward for keeping your money with them. You earn it without doing any extra work."
+          },
+          {
+            "id": "compound_q2",
+            "question": "You have ₹1,000. The bank pays 10% interest per year. How much will you have after 1 year?",
+            "options": ["₹1,000", "₹1,010", "₹1,100", "₹2,000"],
+            "correctIndex": 2,
+            "explanation": "10% of ₹1,000 = ₹100. So ₹1,000 + ₹100 = ₹1,100 after one year."
+          },
+          {
+            "id": "compound_q3",
+            "question": "What makes compound interest special?",
+            "options": [
+              "It disappears if you withdraw your money",
+              "You earn interest on your previously earned interest",
+              "It only works for adults with a lot of money",
+              "Banks give you compound interest as a gift"
+            ],
+            "correctIndex": 1,
+            "explanation": "The magic of compounding is that you earn interest on top of your previously earned interest, so your money grows faster and faster over time."
+          },
+          {
+            "id": "compound_q4",
+            "question": "Why is starting to save early so important?",
+            "options": [
+              "Banks only accept young savers",
+              "You get a discount if you save young",
+              "More time means more compounding and bigger growth",
+              "Interest rates are higher for young people"
+            ],
+            "correctIndex": 2,
+            "explanation": "The longer your money compounds, the more it grows. Starting at 15 instead of 30 gives your money 15 extra years to multiply — making a huge difference."
+          }
+        ]
+      }
+    },
+    {
+      "id": "stocks",
+      "title": "How stocks work",
+      "subtitle": "Owning a piece of a company",
+      "iconName": "show_chart",
+      "colorHex": "3B6D11",
+      "lessons": [
+        {
+          "id": "stocks_l1",
+          "title": "What is a stock?",
+          "duration": "4 min read",
+          "content": "A stock is a small piece of a company. When a company needs money to grow, it sells tiny pieces of itself to the public. Each piece is called a share or stock.\n\nIf you buy one share of a company worth ₹10,000 that has 1,000 shares, you own 1/1000th of that company — you are part owner! If the company does well and grows to ₹20,000, your share is now worth ₹20 instead of ₹10. You made money just by owning it.",
+          "keyPoints": [
+            "A stock is a small ownership piece of a company",
+            "When the company grows, your stock value grows too",
+            "Stocks are bought and sold on a stock exchange"
+          ]
+        },
+        {
+          "id": "stocks_l2",
+          "title": "Why do stock prices change?",
+          "duration": "4 min read",
+          "content": "Stock prices go up and down every day based on how people feel about a company's future. If many people think a company will do well, they want to buy its stock — and when more people want to buy, the price goes up.\n\nIf bad news comes out about a company, people may sell their stock — when more people sell, the price goes down. This is supply and demand in action!\n\nFamous companies like Reliance, Infosys, and TCS have millions of shares traded every single day.",
+          "keyPoints": [
+            "Prices rise when more people want to buy",
+            "Prices fall when more people want to sell",
+            "Company news and results affect prices a lot"
+          ]
+        },
+        {
+          "id": "stocks_l3",
+          "title": "The stock market and patience",
+          "duration": "3 min read",
+          "content": "The stock market can be scary because prices go up and down a lot in the short term. But over long periods — 10, 20, 30 years — the stock market has always gone up.\n\nThis is why investors say 'time in the market beats timing the market'. Instead of trying to buy at the perfect moment, the smarter move is to invest regularly and hold for a long time. Patience is the most important skill in investing.",
+          "keyPoints": [
+            "Short-term prices jump up and down — that is normal",
+            "Long-term, markets have always trended upward",
+            "Investing regularly over time beats trying to guess the market"
+          ]
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "id": "stocks_q1",
+            "question": "What is a stock?",
+            "options": [
+              "A loan you give to a company",
+              "A small ownership piece of a company",
+              "Money stored in a bank account",
+              "A government savings scheme"
+            ],
+            "correctIndex": 1,
+            "explanation": "A stock is a small piece of ownership in a company. When you buy a stock, you become a part-owner of that company."
+          },
+          {
+            "id": "stocks_q2",
+            "question": "A company has 1,000 shares worth ₹10 each. You buy 10 shares. What percentage of the company do you own?",
+            "options": ["1%", "10%", "0.1%", "100%"],
+            "correctIndex": 0,
+            "explanation": "You own 10 out of 1,000 shares, which is 10/1000 = 1% of the company."
+          },
+          {
+            "id": "stocks_q3",
+            "question": "A popular company announces record profits. What will likely happen to its stock price?",
+            "options": [
+              "The price will fall because profits are too high",
+              "The price will stay exactly the same",
+              "The price will rise as more people want to buy",
+              "The company will close down"
+            ],
+            "correctIndex": 2,
+            "explanation": "Good news makes investors confident, so more people want to buy the stock. Higher demand pushes the price up."
+          },
+          {
+            "id": "stocks_q4",
+            "question": "What does 'time in the market beats timing the market' mean?",
+            "options": [
+              "You should trade stocks every hour",
+              "Investing steadily for a long time is better than guessing the perfect moment",
+              "The stock market only works in the morning",
+              "You need to watch prices all day to make money"
+            ],
+            "correctIndex": 1,
+            "explanation": "Trying to pick the perfect time to buy and sell is very hard and usually fails. Investing regularly and staying patient over many years consistently works better."
+          }
+        ]
+      }
+    }
+  ]
+}
