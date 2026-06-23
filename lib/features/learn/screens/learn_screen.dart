@@ -1,138 +1,156 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_colors.dart';
 
-/// A simple data class for a learning module.
-/// Later you'll move this to a proper model + Hive/JSON.
-class _Module {
-  final String id;
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
-  final Color bgColor;
-  final int totalLessons;
+import '../models/module.dart';
+import '../models/module_progress.dart';
+import '../providers/modules_provider.dart';
+import '../providers/progress_provider.dart';
 
-  const _Module({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-    required this.bgColor,
-    required this.totalLessons,
-  });
-}
-
-const _modules = [
-  _Module(
-    id: 'savings',
-    title: 'What is saving?',
-    subtitle: 'Why keeping money matters',
-    icon: Icons.savings_rounded,
-    color: AppColors.learn,
-    bgColor: AppColors.learnLight,
-    totalLessons: 4,
-  ),
-  _Module(
-    id: 'stocks',
-    title: 'How stocks work',
-    subtitle: 'Owning a piece of a company',
-    icon: Icons.show_chart_rounded,
-    color: AppColors.home,
-    bgColor: AppColors.homeLight,
-    totalLessons: 5,
-  ),
-  _Module(
-    id: 'compound',
-    title: 'Compound interest',
-    subtitle: 'Making your money grow',
-    icon: Icons.trending_up_rounded,
-    color: AppColors.expenses,
-    bgColor: AppColors.expensesLight,
-    totalLessons: 3,
-  ),
-  _Module(
-    id: 'budget',
-    title: 'Making a budget',
-    subtitle: 'Spend smart, save more',
-    icon: Icons.pie_chart_rounded,
-    color: AppColors.location,
-    bgColor: AppColors.locationLight,
-    totalLessons: 3,
-  ),
-];
-
-class LearnScreen extends StatelessWidget {
+class LearnScreen extends ConsumerWidget {
   const LearnScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final modulesAsync = ref.watch(modulesProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Learn')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(20),
-        itemCount: _modules.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) {
-          final m = _modules[index];
-          return _ModuleCard(module: m);
-        },
+      body: modulesAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(
+          child: Text('Could not load modules: $e'),
+        ),
+        data: (modules) => ListView.separated(
+          padding: const EdgeInsets.all(20),
+          itemCount: modules.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemBuilder: (context, i) {
+            final module = modules[i];
+            final progress = ref.watch(moduleProgressProvider(module.id));
+            return _ModuleCard(
+              module: module,
+              progress: progress,
+              onTap: () => context.push('/learn/lesson/${module.id}'),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
+// ─────────────────────────────────────────────
+// Module card with progress ring
+// ─────────────────────────────────────────────
+
 class _ModuleCard extends StatelessWidget {
-  const _ModuleCard({required this.module});
-  final _Module module;
+  const _ModuleCard({
+    required this.module,
+    required this.progress,
+    required this.onTap,
+  });
+
+  final LearningModule module;
+  final ModuleProgressData progress;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final ratio = progress.lessonRatio(module.lessons.length);
+    final isDone = progress.quizPassed;
+
     return Card(
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => context.push('/learn/lesson/${module.id}'),
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              // Icon circle
+              // Icon with soft background
               Container(
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
-                  color: module.bgColor,
+                  color: module.lightColor,
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(module.icon, color: module.color, size: 26),
               ),
               const SizedBox(width: 14),
-              // Text
+
+              // Title + subtitle + lesson count
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      module.title,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            module.title,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        if (isDone)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade50,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.check_circle_rounded,
+                                    size: 12, color: Colors.green.shade700),
+                                const SizedBox(width: 3),
+                                Text(
+                                  'Done',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.green.shade700,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 2),
                     Text(
                       module.subtitle,
                       style: const TextStyle(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
+
+                    // Progress bar
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: isDone ? 1.0 : ratio,
+                        minHeight: 5,
+                        backgroundColor: module.lightColor,
+                        valueColor:
+                            AlwaysStoppedAnimation(module.color),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
                     Text(
-                      '${module.totalLessons} lessons',
+                      isDone
+                          ? 'Completed · ${module.lessons.length} lessons · score ${progress.scoreLabel}'
+                          : '${progress.completedLessonIds.length}/${module.lessons.length} lessons',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 11,
                         color: module.color,
                         fontWeight: FontWeight.w500,
                       ),
@@ -140,10 +158,12 @@ class _ModuleCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(
+
+              const SizedBox(width: 8),
+              Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 14,
-                color: AppColors.textSecondary,
+                color: Colors.grey.shade400,
               ),
             ],
           ),
